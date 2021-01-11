@@ -1,0 +1,21 @@
+install.packages("WMWssp")
+library(WMWssp)
+library(dplyr)
+
+#from here https://cran.r-project.org/web/packages/WMWssp/WMWssp.pdf
+
+file <-read_csv("file.csv") 
+#csv should be 10,000 records of control variable in question, exponentially or non-normally distributed
+
+file$variableVector <- as.vector(unlist(file$`variable`))
+#you have to turn the 10K examples into a vector
+
+y <- file$variableVector*1.05 
+# y is your expected relative improvement of the variant vs the control, this example is a 5% relative improvement
+samplesize <- WMWssp(file$variableVector, y, alpha = 0.05, power = 0.8, t = .5, simulation = FALSE, nsim = 10^4)
+#alpha is the two sided type I error rate, usually .05
+# Power we usually keep at .8
+#t is the split of A-B, .5 means a 50-50 split of A to B
+# keep simulation and nsim at the settings listed above
+samplesize
+#first group is the control, second group is the variant
