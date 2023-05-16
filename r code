@@ -18,4 +18,4 @@ samplesize <- WMWssp(file$variableVector, y, alpha = 0.05, power = 0.8, t = .5, 
 #t is the split of A-B, .5 means a 50-50 split of A to B
 # keep simulation and nsim at the settings listed above
 samplesize
-#first group is the control, second group is the variant
+#first group is the control, second group is the variant. Use these values to determine how long you need to run your experiment
